@@ -1,23 +1,41 @@
 const express = require('express');
 const app = new express()
-const PORT = 5000
+const PORT = 4000
 const mongoose = require('mongoose')
+const cors = require('cors'); // to remore cor issue
+app.use(cors())  // cor policy activation
+app.use(express.json()); // to render json req from frontend
+app.use(express.urlencoded({extended:true})); // to render form data from frontend
+
+
 mongoose.connect('mongodb+srv://sahlarajiba:sahla1@cluster0.3jwiy4u.mongodb.net/')
-.then(()=>{console.log("Mongo connected succesfully")})
-.catch((err)=>{console.log(err)})
+.then(()=>{console.log("MongoDB connected successfully")})
+.catch((err)=>{console.log("Error connecting to MongoDB " + err)});
 
 
 
-app.listen(PORT,()=>{
-    console.log('listening on port '+ PORT)
+
+
+// CRUD operation 
+// C-Create - POST 
+//R-READ-GET
+//U-Update -PUT
+//D-Delete - DELETE
+
+app.post('/addData', (req, res) => {
+    try {
+
+        let item = req.body
+        console.log(item)
+
+
+
+    } catch (error) {
+        res.send(error);
+    }
 })
 
 
-app.get('/',(req,res)=>{
-    res.send('welcome')
-})
-
-
-app.get('/about',(req,res)=>{
-    res.send('about')
-})
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`);
+});
