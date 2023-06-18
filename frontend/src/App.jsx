@@ -20,7 +20,7 @@ export default function App() {
 
   const sendData = async (data) => {
     try {
-      const send = await axios.post("http://localhost:4000/addData", data);
+      const send = await axios.post("http://localhost:5837/addData", data);
       console.log(send);
     } catch (error) {
       console.log(error);
